@@ -1,0 +1,2 @@
+#!/bin/bash
+relation-set hostname=`config-get tcp-port` port=`config-get tcp-port`

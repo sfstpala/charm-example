@@ -1,0 +1,5 @@
+#!/bin/bash
+if (daemon --running -n node); then
+    daemon --stop -n node
+fi
+daemon -r -n node -D "/home/ubuntu" -X "node /home/ubuntu/main.js"

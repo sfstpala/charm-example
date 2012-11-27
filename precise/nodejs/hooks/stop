@@ -1,0 +1,4 @@
+#!/bin/bash
+if (daemon --running -n node); then
+    daemon --stop -n node
+fi

@@ -1,0 +1,9 @@
+options:
+    tcp-port:
+        description: TCP port to listen on.
+        default: 10000
+        type: int
+    greeting:
+        description: The text shown on the index page
+        default: "Hello World"
+        type: string

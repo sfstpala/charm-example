@@ -1,0 +1,18 @@
+#!/bin/sh
+
+PORT=`config-get tcp-port`
+GREETING=`config-get greeting`
+
+open-port $PORT/TCP
+
+cat > /home/ubuntu/config.json <<EOF
+{
+    "port": $PORT
+}
+EOF
+
+cat > /home/ubuntu/index.html <<EOF
+<strong>$GREETING</strong>
+EOF
+
+exec `dirname $0`/start

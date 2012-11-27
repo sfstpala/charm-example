@@ -1,2 +1,2 @@
 #!/bin/bash
-relation-set hostname=`config-get tcp-port` port=`config-get tcp-port`
+relation-set hostname=`unit-get private-address` port=`config-get tcp-port`

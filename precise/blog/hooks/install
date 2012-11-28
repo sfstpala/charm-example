@@ -1,0 +1,6 @@
+#!/bin/bash
+
+DEBIAN_FRONTEND=noninteractive apt-get -y install -qq \
+    daemon python-django python-mysqldb
+
+cp -r `dirname $0`/../blog /home/ubuntu/blog

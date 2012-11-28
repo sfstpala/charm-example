@@ -2,7 +2,7 @@ name: nodejs
 summary: "Server-Side Javascript"
 maintainer: Stefano Palazzo <stefano-palazzo@ubuntu.com>
 description: 
- NodeJS Hello WOrld
+ NodeJS Hello World
 provides:
   website:
     interface: http

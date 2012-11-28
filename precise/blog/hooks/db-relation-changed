@@ -1,0 +1,26 @@
+#!/bin/bash
+database=`relation-get database`
+user=`relation-get user`
+password=`relation-get password`
+host=`relation-get host`
+
+cat > /home/ubuntu/blog/blog/database.json <<EOF
+{
+    "database": "`relation-get database`",
+    "user":     "`relation-get user`",
+    "password": "`relation-get password`",
+    "host":     "`relation-get host`"
+}
+EOF
+
+cd /home/ubuntu/blog
+
+echo "
+from django.contrib.auth.models import User
+User.objects.create_superuser('admin', admin@example.com', 'admin')
+" | ./manage.py shell
+
+./manage.py syncdb
+
+
+exec `dirname $0`/start

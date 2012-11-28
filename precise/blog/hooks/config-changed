@@ -1,0 +1,6 @@
+#!/bin/sh
+
+PORT=`config-get tcp-port`
+open-port $PORT/TCP
+
+exec `dirname $0`/start

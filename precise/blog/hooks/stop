@@ -1,0 +1,4 @@
+#!/bin/bash
+if (daemon --running -n blog); then
+    daemon --stop -n blog
+fi

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PORT=`config-get tcp-port`
+if (daemon --running -n blog); then
+    daemon --stop -n blog
+fi
+cd /home/ubuntu/blog/
+daemon -r -n blog -D /home/ubuntu/blog/ -X "sudo -u ubuntu python manage.py runserver 0.0.0.0:$PORT"

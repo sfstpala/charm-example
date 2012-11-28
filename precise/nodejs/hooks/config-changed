@@ -5,14 +5,14 @@ GREETING=`config-get greeting`
 
 open-port $PORT/TCP
 
-cat > /home/ubuntu/config.json <<EOF
+cat > `dirname $0`../server/config.json <<EOF
 {
-    "port": $PORT
+    "port": $PORT,
+    "greeting": $GREETING
 }
 EOF
 
-cat > /home/ubuntu/index.html <<EOF
-<strong>$GREETING</strong>
-EOF
+cd `dirname $0`../server/
+npm install
 
 exec `dirname $0`/start

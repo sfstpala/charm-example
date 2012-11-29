@@ -1,8 +1,12 @@
 #!/bin/bash
-database=`relation-get database`
-user=`relation-get user`
-password=`relation-get password`
-host=`relation-get host`
+
+
+if [ "`relation-get database`" ]; then
+    juju-log "database unset"
+    exit 0
+fi
+
+juju-log "writing database config"
 
 cat > /home/ubuntu/blog/blog/database.json <<EOF
 {
@@ -15,12 +19,19 @@ EOF
 
 cd /home/ubuntu/blog
 
+./manage.py syncdb --noinput
+
 echo "
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blog.settings')
 from django.contrib.auth.models import User
-User.objects.create_superuser('admin', admin@example.com', 'admin')
+User.objects.create_superuser('admin', 'admin@example.com', 'admin')
 " | ./manage.py shell
 
-./manage.py syncdb
 
-
-exec `dirname $0`/start
+PORT=`config-get tcp-port`
+nohup ./manage.py runserver 0.0.0.0:$PORT > /var/log/blog.log 2>&1 &
+PID=$!
+sleep 1
+ps a | grep ^$!
+exit $?
